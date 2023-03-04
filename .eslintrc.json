@@ -1,7 +1,8 @@
 {
   "env": {
-    "es2021": true,
-    "node": true
+    "es2020": true,
+    "node": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base",
@@ -11,21 +12,36 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
   "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "double"],
-    "semi": ["error", "always"],
+    "max-classes-per-file": ["error", 20],
+    "prettier/prettier": "error",
+    "camelcase": "off",
+    "import/no-unresolved": "error",
     "@typescript-eslint/naming-convention": [
       "error",
       {
         "selector": "interface",
         "format": ["PascalCase"],
         "suffix": ["Interface"]
+      }
+    ],
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "no-useless-constructor": "off",
+    "no-empty-function": "off",
+    "lines-between-class-members": "off",
+    "no-case-declarations": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
       }
     ],
     "import-helpers/order-imports": [
@@ -37,6 +53,12 @@
           "order": "asc",
           "ignoreCase": true
         }
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.spec.js", "**/*.spec.ts"]
       }
     ]
   },
