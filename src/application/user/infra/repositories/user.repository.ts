@@ -2,7 +2,7 @@ import { CreateUserDTO } from "@application/user/dto/create-user.dto";
 import { prisma } from "@configs/prisma";
 import { UserModel } from "@domain/user/entity/user.model";
 import { UserRepositoryInterface } from "@domain/user/repository/user-interface-repository";
-import { PrismaClient, users } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 export class UserRepository implements UserRepositoryInterface {
   private prismaClient: PrismaClient;
@@ -54,8 +54,12 @@ export class UserRepository implements UserRepositoryInterface {
   }
 
   public async findByEmail(email: string): Promise<UserModel | undefined> {
-    const user = await this.prismaClient
-      .$queryRaw<users>`SELECT * FROM users WHERE email = ${email}`;
+    // const user = await this.prismaClient
+    //   .$queryRaw<users>`SELECT * FROM users WHERE email = ${email}`;
+
+    const user = await this.prismaClient.users.findFirst({
+      where: { email },
+    });
 
     if (user) {
       return new UserModel(

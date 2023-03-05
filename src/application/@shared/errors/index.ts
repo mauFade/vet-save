@@ -17,6 +17,19 @@ export class NotFoundError extends Error {
   }
 }
 
+export class AlreadyExistsError extends Error {
+  public type: string;
+  public status: number;
+
+  constructor(message: string) {
+    super(message);
+
+    this.name = "AlreadyExistsError";
+    this.type = "ALREADY_EXISTS";
+    this.status = 409;
+  }
+}
+
 export class BadRequestError extends Error {
   public type: string;
   public status: number;
