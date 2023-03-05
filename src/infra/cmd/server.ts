@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "dotenv/config";
 import { AppLogger } from "@application/@shared/logger";
 import { ExpressServer } from "@infra/express";
 

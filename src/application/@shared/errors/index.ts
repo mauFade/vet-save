@@ -30,15 +30,15 @@ export class BadRequestError extends Error {
   }
 }
 
-export class DomainError extends Error {
+export class InvalidTokenError extends Error {
   public type: string;
   public status: number;
 
   constructor(message: string) {
     super(message);
 
-    this.name = "DomainError";
-    this.type = "DOMAIN_ERROR";
+    this.name = "InvalidTokenError";
+    this.type = "INVALID_TOKEN";
     this.status = 401;
   }
 }

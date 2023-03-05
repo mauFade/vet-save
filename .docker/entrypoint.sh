@@ -2,4 +2,6 @@
 
 yarn
 
-npm run start
+npm run start &
+
+/docker-entrypoint.sh
