@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect -T --ignore-watch node_module src/infra/cmd/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect -T --ignore-watch node_modules src/infra/cmd/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "start": "node dist/infra/cmd/server.js",
     "test": "vitest",

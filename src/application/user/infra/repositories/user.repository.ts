@@ -2,7 +2,7 @@ import { CreateUserDTO } from "@application/user/dto/create-user.dto";
 import { prisma } from "@configs/prisma";
 import { UserModel } from "@domain/user/entity/user.model";
 import { UserRepositoryInterface } from "@domain/user/repository/user-interface-repository";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, users } from "@prisma/client";
 
 export class UserRepository implements UserRepositoryInterface {
   private prismaClient: PrismaClient;
@@ -38,7 +38,8 @@ export class UserRepository implements UserRepositoryInterface {
   }
 
   public async find(): Promise<UserModel[]> {
-    const data = await this.prismaClient.users.findMany();
+    const data: users[] = await this.prismaClient
+      .$queryRaw`SELECT * FROM "users"`;
 
     return data.map((user) => {
       return new UserModel(
@@ -54,22 +55,18 @@ export class UserRepository implements UserRepositoryInterface {
   }
 
   public async findByEmail(email: string): Promise<UserModel | undefined> {
-    // const user = await this.prismaClient
-    //   .$queryRaw<users>`SELECT * FROM users WHERE email = ${email}`;
-
-    const user = await this.prismaClient.users.findFirst({
-      where: { email },
-    });
+    const user: users[] = await this.prismaClient
+      .$queryRaw`SELECT * FROM users WHERE email = ${email}`;
 
     if (user) {
       return new UserModel(
-        user.id,
-        user.name,
-        user.email,
-        user.password,
-        user.age,
-        user.created_at,
-        user.updated_at
+        user[0].id,
+        user[0].name,
+        user[0].email,
+        user[0].password,
+        user[0].age,
+        user[0].created_at,
+        user[0].updated_at
       );
     }
 
